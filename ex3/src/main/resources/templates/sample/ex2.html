@@ -1,14 +1,39 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+<meta charset="UTF-8">
+<title>Title</title>
+<style>
+.target{
+    background-color: red;
+</style>
 </head>
 <body>
+<!-- 일반 출력 -->
 <ul>
   <li th:each="dto : ${list}">
     [[${dto}]]
   </li>
+</ul>
+<!-- 5의 배수 출력 -->
+<ul>
+    <li th:each="dto, state : ${list}" th:if="${dto.sno % 5 == 0}">
+        [[${dto}]]
+    </li>
+</ul>
+<!--5개씩 묶어서 출력-->
+<ul>
+    <li th:each="dto, state : ${list}" >
+        <span th:if="${dto.sno % 5 == 0}" th:text="${'-------------------'
++dto.sno}"></span>
+        <span th:unless="${dto.sno % 5 == 0}" th:text="${dto.first}"></span>
+    </li>
+</ul>
+<!--색넣기-->
+<ul>
+    <li th:each="dto, state : ${list}" th:class="${dto.sno % 5 ==
+    0}?'target'" th:text="${dto}">
+    </li>
 </ul>
 </body>
 </html>
