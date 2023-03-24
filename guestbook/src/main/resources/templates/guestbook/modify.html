@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="https://www.thymeleaf.org">
+
+<th:block th:replace="~{/layout/basic :: setContent(~{this::content} )}">
+
+    <th:block th:fragment="content">
+
+        <h1 class="mt-4">GuestBook Modify Page</h1>
+
+        <form action="/guestbook/modify" method="post">
+
+            <input type="hidden" name="page" th:value="${requestDTO.page}">
+
+            <div class="form-group">
+                <label>Gno</label> <!--수정 불가-->
+                <input type="text" class="form-control" name="gno" th:value="${dto.gno}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>Title</label> <!--수정 가능-->
+                <input type="text" class="form-control" name="title" th:value="${dto.title}">
+            </div>
+
+            <div class="form-group">
+                <label>Content</label> <!--수정 가능-->
+                <textarea class="form-control" rows="5" name="content">[[${dto.content}]]"</textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Writer</label> <!--수정 불가-->
+                <input type="text" class="form-control" name="writer" th:value="${dto.writer}" readonly>
+            </div>
+
+            <div class="form-group">
+                <label>RegDate</label>
+                <input type="text" class="form-control"
+                       th:value="${#temporals.format(dto.regDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+            </div>
+
+            <!-- 수정과 목록이 ModDate와 붙어있어서 마진 추가-->
+            <div class="form-group" style="margin-bottom:20px">
+                <label>ModDate</label>
+                <input type="text" class="form-control"
+                       th:value="${#temporals.format(dto.modDate, 'yyyy/MM/dd HH:mm:ss')}" readonly>
+            </div>
+
+        </form>
+
+        <button type="button" class="btn btn-primary modifyBtn">Modify</button>
+        <button type="button" class="btn btn-info listBtn">List</button>
+        <button type="button" class="btn btn-danger removeBtn">Remove</button>
+
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+        <script>
+            let actionForm = $("form");
+
+            $('.modifyBtn').click(function() {
+                if (!confirm('수정하시겠습니까?')) {
+                    return;
+                }
+
+                actionForm
+                .attr('action', '/guestbook/modify')
+                .attr('method', 'post')
+                .submit();
+            });
+
+            $('.listBtn').click(function() {
+                location.href = '/guestbook/list';
+            });
+
+            $('.removeBtn').click(function() {
+                actionForm
+                    .attr('action', '/guestbook/remove')
+                    .attr('method', 'post');
+
+                actionForm.submit();
+
+            });
+        </script>
+
+
+    </th:block>
+
+</th:block>
