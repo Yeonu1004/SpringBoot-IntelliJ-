@@ -4,6 +4,7 @@ import com.example.guestbook.dto.GuestbookDTO;
 import com.example.guestbook.dto.PageRequestDTO;
 import com.example.guestbook.dto.PageResultDTO;
 import com.example.guestbook.entity.Guestbook;
+import com.querydsl.core.BooleanBuilder;
 
 public interface GuestbookService {
     Long register(GuestbookDTO dto);
@@ -38,4 +39,5 @@ public interface GuestbookService {
 
     GuestbookDTO read(Long gno);
 
+    BooleanBuilder getSearch(PageRequestDTO requestDTO);
 }
