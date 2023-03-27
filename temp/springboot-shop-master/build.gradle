@@ -26,24 +26,35 @@ repositories {
 }
 
 dependencies {
+	// Spring Boot and other dependencies
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-thymeleaf'
 	implementation ('nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect')
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	compileOnly 'org.projectlombok:lombok'
-	developmentOnly 'org.springframework.boot:spring-boot-devtools'
-	runtimeOnly 'com.h2database:h2'
-	runtimeOnly 'com.mysql:mysql-connector-j'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	implementation 'com.querydsl:querydsl-jpa'
-	implementation 'com.querydsl:querydsl-apt'
-	implementation 'com.querydsl:querydsl-core'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.security:spring-security-test'
 	implementation 'org.thymeleaf.extras:thymeleaf-extras-springsecurity5'
 	implementation group: 'org.modelmapper', name: 'modelmapper', version: '2.3.9'
+
+	// MariaDB JDBC driver
+	runtimeOnly 'org.mariadb.jdbc:mariadb-java-client'
+
+	// Querydsl and Lombok
+	implementation 'com.querydsl:querydsl-jpa'
+	implementation 'com.querydsl:querydsl-apt'
+	implementation 'com.querydsl:querydsl-core'
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// H2 database for testing
+	runtimeOnly 'com.h2database:h2'
+
+	// Spring Boot DevTools for development
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	// Testing dependencies
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {
@@ -69,3 +80,4 @@ compileQuerydsl {
 configurations {
 	querydsl.extendsFrom compileClasspath
 }
+
