@@ -9,7 +9,10 @@
 
         <form action="/guestbook/modify" method="post">
 
+            <!--페이지 번호, 검색 조건(이전 목록으로 돌아가기 위함)  -->
             <input type="hidden" name="page" th:value="${requestDTO.page}">
+            <input type="hidden" name="type" th:value="${requestDTO.type}">
+            <input type="hidden" name="keyword" th:value="${requestDTO.keyword}">
 
             <div class="form-group">
                 <label>Gno</label> <!--수정 불가-->
@@ -51,7 +54,7 @@
         <button type="button" class="btn btn-danger removeBtn">Remove</button>
 
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-        <script>
+        <script th:inline="javascript">
             let actionForm = $("form");
 
             $('.modifyBtn').click(function() {
@@ -65,16 +68,22 @@
                 .submit();
             });
 
-            $('.listBtn').click(function() {
+            $(".listBtn").click(function() {
+
+                var page = $("input[name='page']");
+                var type = $("input[name='type']");
+                var keyword = $("input[name='keyword']");
+
                 actionForm.empty();
+                actionForm.append(page);
+                actionForm.append(type);
+                actionForm.append(keyword);
+
                 actionForm
-                    .attr('action', '/guestbook/list')
-                    .attr('method', 'get');
-
-                console.log(actionForm.html());
+                    .attr("action", "/guestbook/list")
+                    .attr("method","get");
                 actionForm.submit();
-
-            });
+            })
 
             $('.removeBtn').click(function() {
                 actionForm
@@ -84,9 +93,7 @@
                 actionForm.submit();
 
             });
+
         </script>
-
-
     </th:block>
-
 </th:block>
