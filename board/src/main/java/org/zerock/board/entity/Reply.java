@@ -20,6 +20,7 @@ public class Reply extends BaseEntity{
     private String replyer;
 
     @ManyToOne
-    private Board board;
+    private Board board; //연간관계 지정
+
 
 }
