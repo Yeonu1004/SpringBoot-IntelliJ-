@@ -4,8 +4,8 @@ import com.example.guestbook.dto.GuestbookDTO;
 import com.example.guestbook.dto.PageRequestDTO;
 import com.example.guestbook.dto.PageResultDTO;
 import com.example.guestbook.service.GuestbookService;
-import lombok.RequiredArgsConstructor; //
-import lombok.extern.log4j.Log4j2; //
+import lombok.RequiredArgsConstructor;
+import lombok.extern.log4j.Log4j2;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
